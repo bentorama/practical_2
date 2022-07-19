@@ -51,15 +51,15 @@ module "vpc" {
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "18.26.3"
+  version = "17.24.0"
 
   cluster_name    = "${local.cluster_name}"
   cluster_version = "1.22"
-  subnet_ids         = module.vpc.private_subnets
+  subnets         = module.vpc.private_subnets
 
   vpc_id = module.vpc.vpc_id
 
-  eks_managed_node_groups = {
+  node_groups = {
     first = {
       desired_capacity = 1
       max_capacity     = 5
@@ -69,6 +69,6 @@ module "eks" {
     }
   }
 
-  #write_kubeconfig   = true
-  #config_output_path = "./"
+  write_kubeconfig   = true
+  kubeconfig_output_path = "./"
 }
