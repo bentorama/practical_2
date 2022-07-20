@@ -59,6 +59,8 @@ module "eks" {
 
   vpc_id = module.vpc.vpc_id
 
+  kubeconfig_api_version = "client.authentication.k8s.io/v1beta1"
+
   node_groups = {
     first = {
       desired_capacity = 1
