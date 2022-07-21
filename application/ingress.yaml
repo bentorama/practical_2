@@ -3,7 +3,6 @@ kind: Ingress
 metadata:
   name: hello-kubernetes
   annotations:
-    alb.ingress.kubernetes.io/subnets: subnet-07770678853208bb2, subnet-00b03ec0380625e08, subnet-0430a7009de7bdf25
     alb.ingress.kubernetes.io/scheme: internet-facing
     kubernetes.io/ingress.class: alb
 spec:

@@ -1,3 +1,16 @@
+terraform {
+  required_providers {
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "2.10"
+    }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "2.6.0"
+    }
+  }
+}
+
 provider "aws" {
   region = "eu-west-2"
 }
@@ -15,7 +28,6 @@ provider "kubernetes" {
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
   token                  = data.aws_eks_cluster_auth.cluster.token
   #load_config_file       = false
-  version                = "2.10"
 }
 
 data "aws_availability_zones" "available" {
@@ -123,7 +135,6 @@ resource "aws_iam_policy" "worker_policy" {
 }
 
 provider "helm" {
-  version = "2.6.0"
   kubernetes {
     host                   = data.aws_eks_cluster.cluster.endpoint
     cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
