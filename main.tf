@@ -22,7 +22,7 @@ data "aws_availability_zones" "available" {
 }
 
 locals {
-  cluster_name = "prac2-grp1-k8s-test"
+  cluster_name = "prac2-grp1-k8s-prod"
 }
 
 module "vpc" {
@@ -75,6 +75,44 @@ module "eks" {
   kubeconfig_output_path = "./"
 
   workers_additional_policies = [aws_iam_policy.worker_policy.arn]
+
+  map_users = [
+    {
+      userarn  = "arn:aws:iam::670114001127:user/cobirch"
+      username = "cobirch"
+      groups   = ["system:masters"]
+    },
+    {
+      userarn  = "arn:aws:iam::670114001127:user/bakinyem"
+      username = "bakinyem"
+      groups   = ["system:masters"]
+    },
+    {
+      userarn  = "arn:aws:iam::670114001127:user/edbent"
+      username = "edbent"
+      groups   = ["system:masters"]
+    },
+    {
+      userarn  = "arn:aws:iam::670114001127:user/mjimale"
+      username = "mjimale"
+      groups   = ["system:masters"]
+    },
+    {
+      userarn  = "arn:aws:iam::670114001127:user/nasall"
+      username = "nasall"
+      groups   = ["system:masters"]
+    },
+    {
+      userarn  = "arn:aws:iam::670114001127:user/nharper"
+      username = "nharper"
+      groups   = ["system:masters"]
+    },
+    {
+      userarn  = "arn:aws:iam::670114001127:user/yamalik"
+      username = "yamalik"
+      groups   = ["system:masters"]
+    },
+  ]
 }
 
 resource "aws_iam_policy" "worker_policy" {
